@@ -1,0 +1,19 @@
+# Maven
+target/
+
+# TestNG
+test-output/
+
+# Allure
+allure-report/
+allure-results/
+
+# IDE
+.classpath
+.project
+.settings/
+.idea/
+*.iml
+
+# Logs
+*.log
