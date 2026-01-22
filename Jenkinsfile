@@ -20,8 +20,7 @@ pipeline {
                 }
             }
         }
-
-        stage('Allure Report') {
+    }
 
     post {
         always {
