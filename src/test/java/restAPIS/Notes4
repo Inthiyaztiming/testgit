@@ -1,0 +1,14 @@
+RequestSpecification and ResponseSpecification are used to reduce boilerplate code by defining common request 
+and response configurations such as base URI, headers, authentication, content type, and expected status codes 
+in one central place.
+
+Both RequestSpecification and ResponseSpecification are interfaces, so they cannot be instantiated directly. 
+Instead, Rest Assured provides RequestSpecBuilder and ResponseSpecBuilder, which are concrete builder classes
+ used to construct these specifications.
+
+The build() method is mandatory because it converts the builder configuration into an actual RequestSpecification 
+or ResponseSpecification object that Rest Assured can execute. Without calling build(), we only have a builder 
+object, not a usable specification.
+
+Internally, Rest Assured converts this configuration into an immutable specification that can be reused 
+across multiple tests.

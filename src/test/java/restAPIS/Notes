@@ -1,0 +1,57 @@
+----------------------------------COOKIES----------------------------
+
+You visit a website and log in with your username and password.
+The server creates a session for you.
+It sends a session cookie back to your browser (e.g., sessionId=abc123).
+
+On the next visit to the website:-
+Your browser sends the sessionId cookie back to the server.
+The server looks up the session ID and verifies that you are authenticated.
+It loads your account, remembering that you're logged in, and shows your personalized homepage.
+
+What Information Can Be Remembered?
+Authentication State: Are you logged in? What user account are you using?
+User Preferences: Things like the theme (light/dark), language, or default page settings.
+Browsing History (if tracked): Some websites may track the pages you've visited or what you’ve clicked on for analytics or to personalize the content.
+Shopping Cart: For e-commerce websites, the items you’ve added to your shopping cart can be remembered even if you leave the site and return later.
+
+
+
+--------------------------------------Parsing JSON Response---------------
+
+Means extracting values from the JSON structure so we can use them (e.g., for validation, chaining, or debugging).
+Example:- String mobileNumber= res.jsonPath().get("x.mobile").toString();
+
+Validating JSON Response
+Means checking if the values are correct, match expected results, or meet certain conditions.
+Example:- Assert.assertEquals(mobileNumber, "9999999999");
+
+
+Response: The response in an API is what we actually get back when we make a request, including status code, headers, and the body (which contains the data).
+Schema: Describes the expected structure and types of the data, such as what fields are included and whether they are strings, integers, etc. 
+It validates that the response (or request) matches the expected format.
+
+Postman: Allows you to test XML responses and check values or elements, but doesn't support XML Schema Validation (XSD validation) directly.
+Rest Assured: Supports XML Schema Validation and allows you to validate XML responses
+If you're working primarily with JSON-based REST APIs, Postman is great for quick manual or semi-automated testing.
+If you're working with XML-based APIs and need to validate against XML Schema Definitions (XSD), then Rest Assured is preferred because Postman doesn’t natively support that.
+
+
+JSON → JSON Schema → .json file extension
+XML → XML Schema → .xsd file extension
+
+
+Serialization = Convert object → data format
+Turning a programming object (like a class instance) into a format that can be stored or sent over the network — usually JSON, XML, or binary.
+
+Deserialization = Convert data format → object
+Turning that data (JSON, XML, etc.) back into a usable object in your code.
+
+We need serialization and deserialization to send and receive data over a network.
+Programming objects can't travel directly through the network, so we serialize them into a format like JSON or XML.
+The receiving side then deserializes that data back into usable objects.
+
+Rest Assured internally uses Jackson’s ObjectMapper for JSON serialization and deserialization. For simple cases like mapping responses to POJOs 
+using .as(Class), it handles everything automatically.
+However, when we need more control — like custom field mappings, date formats, or handling unknown fields — we use ObjectMapper directly to manage 
+the process ourselves.

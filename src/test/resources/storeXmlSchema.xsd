@@ -1,0 +1,3 @@
+1. First, we take the XML response we get after hitting the API and paste it into an XML to XSD converter website to generate the XML schema.
+2. Then we store that schema in this file.
+3. After that,In then() method we compare the API response with the schema which is stored in this file. 

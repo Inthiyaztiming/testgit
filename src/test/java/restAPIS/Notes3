@@ -1,0 +1,48 @@
+---------------------Api Chaining---------------------
+
+API chaining is the process where the response from one API request is used as the input or parameter for another API request. 
+It enables sequential execution of API calls that depend on each other's data.
+
+Example Chain Structure:-
+CreateUser → GetUser → UpdateUser → DeleteUser
+Each step depends on data (e.g., user ID) returned from the previous one.
+
+Approach 1: Single-Class Implementation
+
+All CRUD operations (Create, Read, Update, Delete) are implemented within a single class (e.g., ApiChaining.java).
+The CreateUser method retrieves a response (like a user ID).
+That ID is stored and reused directly in other methods (e.g., GetUser, UpdateUser,DeleteUser).
+
+Approach 2: Multi-Class with ITestContext
+Each CRUD operation is written in a separate class.
+Shared data (like user ID) is passed between classes using the ITestContext interface:
+setAttribute() is used in one class to store data.
+getAttribute() is used in another class to retrieve it.
+
+Since the test methods are spread across multiple classes and depend on each other, they cannot be run individually by default.
+Solution: Use a TestNG XML file to control execution order.
+
+Running Tests with XML Configuration
+To run dependent test classes in sequence, define them within a single <test> tag in the XML.
+To allow running classes independently: Use separate <test> tags for each class, Use getSuite().setAttribute() to share data 
+at the suite level, ensuring accessibility across all <test> tags.
+
+API chaining can also be used to share common variables (e.g., bearer tokens) across multiple tests.
+Promotes modularity, reusability, and cleaner test design, especially in complex test automation frameworks.
+
+--------------------------Challenges faced while api testing---------------
+
+
+1. Incorrect Parameter Mapping – Employee ID vs Mobile Number
+
+During the integration of third-party APIs into our application, I was responsible for testing the functionality.
+According to the Swagger documentation, all APIs were supposed to fetch data using the employee ID. 
+But during testing, some APIs returned a 200 response with no data. After debugging, I found they were internally 
+mapped to mobile number instead of employee ID. I documented the issue, validated with additional tests, and 
+coordinated with the dev team and API provider. They later confirmed the mapping inconsistency and fixed it.
+
+2.Security Issue – Login Using GET Method
+
+The login API was using a GET method with username and password in the query parameters. This exposed sensitive 
+information in the URL and logs. I immediately raised it as a critical security concern, and the provider switched 
+it to a POST method to secure the credentials in the request body.

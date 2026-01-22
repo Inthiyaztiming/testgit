@@ -1,0 +1,62 @@
+Authentication: API verifies our identity (e.g., via token, API key, username/password)
+Example: Logging in with username & password
+
+Authorization: API checks if we are allowed to perform the action (e.g., access /admin, delete a user).
+Example: Checking if a logged-in user can access admin features
+
+Types of Authentication supported by rest assured:-
+Basic Authentication, Digest Authentication,OAuth 1.0,OAuth 2.0, No Authentication,Api key, preemptive,bearer token etc
+
+Basic Auth: Follows a challenge-response flow. The first request is sent without credentials, the server responds with a 401 Unauthorized, 
+and then the client retries with credentials.
+
+Preemptive Basic Auth: Skips the round trip. Credentials are sent immediately with the first request, avoiding the 401 challenge.
+
+Digest Auth: More secure — instead of sending credentials directly, it sends a hashed value using the username, password, and a random nonce 
+provided by the server. This helps prevent credentials from being intercepted.
+
+----------------------basic vs preemptive--------------------
+According to the HTTP protocol spec, Basic Authentication is designed to be a challenge-response mechanism.
+
+Some servers are strictly configured to only respond to 401 challenges — they won’t accept preemptive credentials because:
+They want to enforce that flow.
+They're built on frameworks or middleware that expect it.
+They might be tracking auth attempts for security auditing.
+
+So in such cases, you have to go with the round trip(basic) — even if it's inefficient.
+
+--------------------Bearer Token---------------
+Bearer Token authentication is a form of token-based authentication, commonly used in modern APIs, especially with OAuth 2.0.
+We pass bearer token in headers not in auth directly.
+
+---------------------------How It Works:-----------
+First,we or client authenticate ourself (e.g., using credentials, API key, or OAuth flow) and receives a token from the server.
+Then we send the token in every request using the Authorization header.
+The server validates the token,not the credentials directly and allows or denies access based on its validity and permissions (scopes).
+It’s stateless — no need to re-authenticate with every request.
+
+---------------oauth 1.0&2.0----------
+> OAuth 1.0 is a legacy protocol which uses a signature-based approach where each request is cryptographically signed using HMAC-SHA1 and requires four credentials: 
+consumer key, consumer secret, access token, and token secret. While secure, it’s quite complex and difficult to manage.
+
+> OAuth 2.0 introduced a more flexible and developer-friendly model. It uses a single Bearer token, reduces complexity, and supports multiple flows 
+like Authorization Code, Client Credentials, and Password Grant. Although it doesn’t sign each request, it relies on HTTPS for transport security. 
+It’s now the standard for most modern APIs including Google, Microsoft, and Facebook.
+
+-----------API KEY------------------
+An API key is a unique alphanumeric string issued by an API provider to identify and authenticate the client making requests to the API.
+We pass api key in headers or query params not in auth directly.
+
+The auth() method is designed to support standard authentication protocols with well-defined flows, such as:
+Basic Authentication (username & password),Digest Authentication, OAuth 1.0 and OAuth 2.0 etc
+
+API keys are simple tokens that APIs expect directly in headers or query parameters.
+There’s no formal authentication flow or protocol around API keys for Rest Assured to handle.
+
+
+In Rest Assured, the Faker library is commonly used to generate dynamic, random test data (like names, emails, phone numbers) 
+when sending API requests. This helps avoid hardcoded values and ensures better test coverage by using unique data 
+for each test run.
+
+I create a token utility class to generate and store tokens. While making API calls, if the response status is 401,
+ I regenerate the token and retry the request automatically
