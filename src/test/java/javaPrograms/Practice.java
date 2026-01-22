@@ -11,6 +11,5 @@ public class Practice {
 
 	public static void main(String[] args) throws IOException 
 	{	
-		WebDriver driver= new ChromeDriver();
-		Select se= new Select(driver.findElement(By.id("aaa")));
+		
 	}}

@@ -22,15 +22,6 @@ pipeline {
         }
 
         stage('Allure Report') {
-            steps {
-                // Generate Allure report from test results
-                allure([
-                    reportBuildPolicy: 'ALWAYS',
-                    results: [[path: 'target/allure-results']]
-                ])
-            }
-        }
-    }
 
     post {
         always {
