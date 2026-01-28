@@ -25,7 +25,7 @@ pipeline {
     post {
         always {
             junit '**/target/surefire-reports/*.xml'
-            echo 'Complete CI-CD Pipeline execution completed'
+            echo 'CI-CD Pipeline execution completed'
         }
     }
 }
