@@ -56,7 +56,7 @@ even if alerts pop up unexpectedly.
 /*
 Variable Initialization Rules in Java
 Local Variables:Can be declared without initialization.
-Must be initialized before use, otherwise compile-time error.
+but Must be initialized before use, otherwise compile-time error.
 
 Instance / Static Variables:
 No need to explicitly initialize; if initialized, that value is used.
